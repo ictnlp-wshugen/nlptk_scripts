@@ -14,7 +14,7 @@ def main(args):
         setattr(args, 'output_path', '{}.untok'.format(args.file_path))
     script_path = os.path.dirname(os.path.abspath(__file__))
     kwargs = {
-        'class_path': '{}/stanford-postagger-3.9.1.jar'.format(script_path),
+        'class_path': '{}/vendor/stanford-postagger-3.9.1.jar'.format(script_path),
         'main_class': 'edu.stanford.nlp.process.PTBTokenizer',
         'input': args.file_path,
         'output': args.output_path,

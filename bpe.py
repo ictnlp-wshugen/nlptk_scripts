@@ -15,7 +15,7 @@ def main(args):
     setattr(args, 'codes_path', '{}.bpe.codes'.format(args.file_path))
     if args.scripts_path is None:
         script_path = os.path.dirname(os.path.abspath(__file__))
-        setattr(args, 'scripts_path', '{}/subword-nmt'.format(script_path))
+        setattr(args, 'scripts_path', '{}/vendor/subword-nmt'.format(script_path))
     assert os.path.isdir(args.scripts_path), 'file path {} does not exist'.format(args.scripts_path)
     if os.path.isdir('{}/subword_nmt'.format(args.scripts_path)):
         setattr(args, 'scripts_path', '{}/subword_nmt'.format(args.scripts_path))

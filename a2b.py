@@ -14,7 +14,7 @@ def main(args):
         setattr(args, 'output_path', '{}.a2b'.format(args.file_path))
     script_path = os.path.dirname(os.path.abspath(__file__))
     kwargs = {
-        'command': '{}/tra2b'.format(script_path),
+        'command': '{}/bin/tra2b'.format(script_path),
         'input': args.file_path,
         'output': args.output_path,
         'options': ' '.join([
