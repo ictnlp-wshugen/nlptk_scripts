@@ -11,7 +11,7 @@ from options import parse_convert_arguments
 
 def main(args):
     if args.output_path is None:
-        setattr(args, 'output_path', '{}.tok'.format(getattr(args, 'file_path')))
+        setattr(args, 'output_path', '{}.tok'.format(args.file_path))
     script_path = os.path.dirname(os.path.abspath(__file__))
     kwargs = {
         'class_path': '{}/stanford-postagger-3.9.1.jar'.format(script_path),

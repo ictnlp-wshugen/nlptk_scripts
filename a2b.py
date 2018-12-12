@@ -10,7 +10,7 @@ from options import parse_convert_arguments
 
 def main(args):
     if args.output_path is None:
-        setattr(args, 'output_path', '{}.tok'.format(getattr(args, 'file_path')))
+        setattr(args, 'output_path', '{}.tok'.format(args.file_path))
     option = 'pre' if args.lang == 'zh' else 'all'
     cmd_str = './tra2b -{} {} {} {}'.format(args.encoding, option, args.file_path, args.output_path)
     if args.verbose:
