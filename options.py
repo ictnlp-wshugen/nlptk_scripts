@@ -5,12 +5,25 @@
 import argparse
 
 
-def parse_convert_arguments():
-    parser = argparse.ArgumentParser('Tokenize')
+def get_parser():
+    parser = argparse.ArgumentParser()
     parser.add_argument('--verbose', '-v', type=bool, default=False, help='output command str')
+    return parser
+
+
+def get_convert_parser():
+    parser = get_parser()
+    add_convert_args_(parser)
+    return parser
+
+
+def add_convert_args_(parser):
     parser.add_argument('--file-path', '-f', required=True, help='file path to be a2b')
     parser.add_argument('--output-path', '-o', help='file path to save')
     parser.add_argument('--encoding', '-e', default='utf8', choices=['utf8', 'gbk'], help='file encoding')
     parser.add_argument('--lang', '-l', default='zh', choices=['zh', 'en'], help='file encoding')
-    _args, _ = parser.parse_known_args()
-    return _args
+
+
+def parse_convert_arguments():
+    parser = get_convert_parser()
+    return parser.parse_known_args()[0]
