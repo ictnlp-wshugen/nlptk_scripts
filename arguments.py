@@ -7,6 +7,7 @@ import argparse
 
 def parse_convert_arguments():
     parser = argparse.ArgumentParser('Tokenize')
+    parser.add_argument('--verbose', '-v', type=bool, default=False, help='output command str')
     parser.add_argument('--file-path', '-f', required=True, help='file path to be a2b')
     parser.add_argument('--output-path', '-o', help='file path to save')
     parser.add_argument('--encoding', '-e', default='utf8', choices=['utf8', 'gbk'], help='file encoding')
