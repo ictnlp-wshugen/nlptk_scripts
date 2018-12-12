@@ -9,11 +9,13 @@ from arguments import parse_convert_arguments
 
 
 def main(args):
-    if not hasattr(args, 'output_path'):
+    if args.output_path is None:
         setattr(args, 'output_path', '{}.tok'.format(getattr(args, 'file_path')))
     option = 'pre' if args.lang == 'zh' else 'all'
-    cmd_fmt = './tra2b -{} {} {} {}'.format(args.encoding, option, args.file_path, args.output_path)
-    subprocess.check_call(cmd_fmt)
+    cmd_str = './tra2b -{} {} {} {}'.format(args.encoding, option, args.file_path, args.output_path)
+    if args.verbose:
+        print(cmd_str)
+    subprocess.check_call(cmd_str, shell=True)
 
 
 if __name__ == '__main__':
