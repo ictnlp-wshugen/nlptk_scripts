@@ -3,18 +3,9 @@
 # author: 王树根
 # email: wangshugen@ict.ac.cn
 # date: 2018-12-12 19:54
-import argparse
 import subprocess
 
-
-def parse_arguments():
-    parser = argparse.ArgumentParser('A2B')
-    parser.add_argument('--file-path', '-f', required=True, help='file path to be a2b')
-    parser.add_argument('--output-path', '-o', help='file path to save')
-    parser.add_argument('--encoding', '-e', default='utf8', choices=['utf8', 'gbk'], help='file encoding')
-    parser.add_argument('--lang', '-l', default='zh', choices=['zh', 'en'], help='file encoding')
-    _args, _ = parser.parse_known_args()
-    return _args
+from arguments import parse_convert_arguments
 
 
 def main(args):
@@ -26,5 +17,5 @@ def main(args):
 
 
 if __name__ == '__main__':
-    arguments = parse_arguments()
+    arguments = parse_convert_arguments()
     main(arguments)
