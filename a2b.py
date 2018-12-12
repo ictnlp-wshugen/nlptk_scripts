@@ -11,7 +11,7 @@ from options import parse_convert_arguments
 
 def main(args):
     if args.output_path is None:
-        setattr(args, 'output_path', '{}.tok'.format(args.file_path))
+        setattr(args, 'output_path', '{}.a2b'.format(args.file_path))
     script_path = os.path.dirname(os.path.abspath(__file__))
     kwargs = {
         'command': '{}/tra2b'.format(script_path),
