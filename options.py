@@ -17,6 +17,12 @@ def get_convert_parser():
     return parser
 
 
+def get_shuffle_parser():
+    parser = get_convert_parser()
+    parser.add_argument('--seed', '-s', type=int, default=195610, help='the PRNG seed for reproducibility')
+    return parser
+
+
 def get_bpe_parser():
     parser = get_convert_parser()
     add_bpe_args_(parser)
@@ -36,11 +42,17 @@ def add_convert_args_(parser):
     parser.add_argument('--lang', '-l', default='zh', choices=['zh', 'en'], help='file encoding')
 
 
+def parse_shuffle_arguments():
+    return parser_arguments(get_shuffle_parser())
+
+
 def parse_convert_arguments():
-    parser = get_convert_parser()
-    return parser.parse_known_args()[0]
+    return parser_arguments(get_convert_parser())
 
 
 def parse_bpe_arguments():
-    parser = get_bpe_parser()
+    return parser_arguments(get_bpe_parser())
+
+
+def parser_arguments(parser):
     return parser.parse_known_args()[0]
