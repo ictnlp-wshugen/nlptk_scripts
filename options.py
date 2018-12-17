@@ -44,7 +44,8 @@ def parse_shuffle_arguments():
 
 def add_bpe_args_(parser):
     parser.add_argument('--operations', '-n', type=int, default=32000, help='num of operations')
-    parser.add_argument('--keep-codes', '-k', type=bool, default=False, help='whether to keep codes file or not')
+    parser.add_argument('--keep-codes', '-k', action='store_true', default=False,
+                        help='whether to keep codes file or not')
     parser.add_argument('--scripts-path', '-p', default=None, help='subword-nmt path')
 
 
