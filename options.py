@@ -5,34 +5,14 @@
 import argparse
 
 
+def parser_arguments(parser):
+    return parser.parse_known_args()[0]
+
+
 def get_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('--verbose', '-v', type=bool, default=False, help='output command str')
     return parser
-
-
-def get_convert_parser():
-    parser = get_parser()
-    add_convert_args_(parser)
-    return parser
-
-
-def get_shuffle_parser():
-    parser = get_convert_parser()
-    parser.add_argument('--seed', '-s', type=int, default=195610, help='the PRNG seed for reproducibility')
-    return parser
-
-
-def get_bpe_parser():
-    parser = get_convert_parser()
-    add_bpe_args_(parser)
-    return parser
-
-
-def add_bpe_args_(parser):
-    parser.add_argument('--operations', '-n', type=int, default=32000, help='num of operations')
-    parser.add_argument('--keep-codes', '-k', type=bool, default=False, help='whether to keep codes file or not')
-    parser.add_argument('--scripts-path', '-p', default=None, help='subword-nmt path')
 
 
 def add_convert_args_(parser):
@@ -42,17 +22,37 @@ def add_convert_args_(parser):
     parser.add_argument('--lang', '-l', default='zh', choices=['zh', 'en'], help='file encoding')
 
 
-def parse_shuffle_arguments():
-    return parser_arguments(get_shuffle_parser())
+def get_convert_parser():
+    parser = get_parser()
+    add_convert_args_(parser)
+    return parser
 
 
 def parse_convert_arguments():
     return parser_arguments(get_convert_parser())
 
 
+def get_shuffle_parser():
+    parser = get_convert_parser()
+    parser.add_argument('--seed', '-s', type=int, default=195610, help='the PRNG seed for reproducibility')
+    return parser
+
+
+def parse_shuffle_arguments():
+    return parser_arguments(get_shuffle_parser())
+
+
+def add_bpe_args_(parser):
+    parser.add_argument('--operations', '-n', type=int, default=32000, help='num of operations')
+    parser.add_argument('--keep-codes', '-k', type=bool, default=False, help='whether to keep codes file or not')
+    parser.add_argument('--scripts-path', '-p', default=None, help='subword-nmt path')
+
+
+def get_bpe_parser():
+    parser = get_convert_parser()
+    add_bpe_args_(parser)
+    return parser
+
+
 def parse_bpe_arguments():
     return parser_arguments(get_bpe_parser())
-
-
-def parser_arguments(parser):
-    return parser.parse_known_args()[0]
