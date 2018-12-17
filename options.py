@@ -5,13 +5,13 @@
 import argparse
 
 
-def parser_arguments(parser):
+def parse_arguments(parser):
     return parser.parse_known_args()[0]
 
 
 def get_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--verbose', '-v', type=bool, default=False, help='output command str')
+    parser.add_argument('--verbose', '-v', action='store_true', default=False, help='output command str')
     return parser
 
 
@@ -29,7 +29,7 @@ def get_convert_parser():
 
 
 def parse_convert_arguments():
-    return parser_arguments(get_convert_parser())
+    return parse_arguments(get_convert_parser())
 
 
 def get_shuffle_parser():
@@ -39,7 +39,7 @@ def get_shuffle_parser():
 
 
 def parse_shuffle_arguments():
-    return parser_arguments(get_shuffle_parser())
+    return parse_arguments(get_shuffle_parser())
 
 
 def add_bpe_args_(parser):
@@ -55,4 +55,4 @@ def get_bpe_parser():
 
 
 def parse_bpe_arguments():
-    return parser_arguments(get_bpe_parser())
+    return parse_arguments(get_bpe_parser())
