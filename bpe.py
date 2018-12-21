@@ -36,6 +36,9 @@ def main(args):
         setattr(args, 'output_path', '{}.bpe.{}'.format(args.file_path, args.operations))
     if args.codes_path is None:
         setattr(args, 'codes_path', '{}.bpe.codes'.format(args.file_path))
+    else:
+        setattr(args, 'keep_codes', True)
+
     if args.scripts_path is None:
         script_path = os.path.dirname(os.path.abspath(__file__))
         setattr(args, 'scripts_path', '{}/vendor/subword-nmt'.format(script_path))
