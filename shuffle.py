@@ -7,7 +7,18 @@ import io
 
 import numpy
 
-from options import parse_shuffle_arguments
+from options import get_convert_parser
+from options import parse_arguments
+
+
+def get_shuffle_parser():
+    parser = get_convert_parser()
+    parser.add_argument('-s', '--seed', type=int, default=195610, help='the PRNG seed for reproducibility')
+    return parser
+
+
+def parse_shuffle_arguments():
+    return parse_arguments(get_shuffle_parser())
 
 
 def main(args):
