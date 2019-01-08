@@ -16,7 +16,7 @@ def get_parser():
 
 
 def add_convert_args_(parser):
-    parser.add_argument('-f', '--file-path', required=True, help='file path to be a2b')
+    parser.add_argument('-f', '--file-path', required=True, help='file path to be convert')
     parser.add_argument('-o', '--output-path', help='file path to save')
     parser.add_argument('-e', '--encoding', default='utf8', choices=['utf8', 'gbk'], help='file encoding')
     parser.add_argument('-l', '--lang', default='zh', choices=['zh', 'en'], help='file encoding')
