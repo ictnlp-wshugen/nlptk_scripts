@@ -10,7 +10,7 @@ from utils.file_ops import load_file_contents
 
 def get_stat_parser():
     parser = get_parser()
-    parser.add_argument('-fps', '--file-paths', nargs='+',
+    parser.add_argument('-fps', '--file-paths', nargs='+', required=True,
                         help='file paths to be counted')
     return parser
 
@@ -21,21 +21,29 @@ def parse_stat_arguments():
 
 def count_file_tokens(file_path):
     contents = load_file_contents(file_path)
+
+    vocab = set()
     count = 0
     for line in contents:
         tokens = line.strip().split()
         count += len(tokens)
-    return count
+        for token in tokens:
+            if token not in vocab:
+                vocab.add(token)
+    return count, vocab
 
 
 def main(args):
+    vocab = set()
     count = 0
     for file_path in args.file_paths:
-        _count = count_file_tokens(file_path)
+        _count, _vocab = count_file_tokens(file_path)
+        vocab |= _vocab
         if args.verbose:
-            print('{} tokens in {}'.format(_count, file_path))
+            print('{} tokens with diversity {} in {}'
+                  .format(_count, len(_vocab), file_path))
         count += _count
-    print('{} tokens total'.format(count))
+    print('{} tokens with diversity {} total'.format(count, len(vocab)))
 
 
 if __name__ == '__main__':
