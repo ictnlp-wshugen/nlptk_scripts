@@ -39,7 +39,7 @@ def main(args):
 
 if __name__ == '__main__':
     parser = get_parser()
-    parser.add_argument('--file-path', '-f', help='file path')
+    parser.add_argument('--file-path', '-f', help='file path', required=True)
     parser.add_argument('--split', '-s', action='store_true', default=False)
     parser.add_argument('--max-length', '-l', type=int, default=100, help='max length of sentence')
     main(parse_arguments(parser))
