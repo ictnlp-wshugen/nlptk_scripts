@@ -6,6 +6,8 @@
 import os
 import subprocess
 
+from easy_tornado.utils.file_operation import file_exists
+
 from options import get_convert_parser
 from options import parse_arguments
 
@@ -53,10 +55,11 @@ def main(args):
         'input': args.file_path,
         'output': args.codes_path
     }
-    learn_bpe_cmd_str = '{learn} {option} {operations} < {input} > {output}'.format(**kwargs)
-    if args.verbose:
-        print(learn_bpe_cmd_str)
-    subprocess.check_call(learn_bpe_cmd_str, shell=True)
+    if not file_exists(args.codes_path):
+        learn_bpe_cmd_str = '{learn} {option} {operations} < {input} > {output}'.format(**kwargs)
+        if args.verbose:
+            print(learn_bpe_cmd_str)
+        subprocess.check_call(learn_bpe_cmd_str, shell=True)
 
     kwargs.update({
         'apply': '{}/apply_bpe.py'.format(args.scripts_path),
