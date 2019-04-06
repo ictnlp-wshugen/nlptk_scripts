@@ -13,7 +13,8 @@ from options import parse_arguments
 
 def get_shuffle_parser():
     parser = get_convert_parser()
-    parser.add_argument('-s', '--seed', type=int, default=195610, help='the PRNG seed for reproducibility')
+    parser.add_argument('-s', '--seed', type=int, default=195610,
+                        help='the PRNG seed for reproducibility')
     return parser
 
 

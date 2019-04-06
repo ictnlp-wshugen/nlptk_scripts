@@ -3,9 +3,10 @@
 # author: 王树根
 # email: wangshugen@ict.ac.cn
 # date: 2019-01-02 14:39
+from easy_tornado.utils.file_operation import load_file_contents
+
 from options import get_parser
 from options import parse_arguments
-from utils.file_ops import load_file_contents
 
 
 def get_stat_parser():
@@ -20,7 +21,7 @@ def parse_stat_arguments():
 
 
 def count_file_tokens(file_path):
-    contents = load_file_contents(file_path)
+    contents = load_file_contents(file_path, strip=False)
 
     vocab = set()
     count = 0
