@@ -24,7 +24,7 @@ def parse_shuffle_arguments():
 
 def main(args):
     if args.output_path is None:
-        setattr(args, 'output_path', '{}.shuffle'.format(args.file_path))
+        setattr(args, 'output_path', '{}.shuf'.format(args.file_path))
     with io.open(args.file_path, mode='r', encoding=args.encoding) as rfp, \
             io.open(args.output_path, mode='w', encoding=args.encoding) as wfp:
         contents = rfp.readlines()
