@@ -6,7 +6,6 @@
 from collections import OrderedDict
 
 from easy_tornado.compat import python2
-from easy_tornado.functional import timed
 from easy_tornado.utils.file_operation import file_exists
 from easy_tornado.utils.file_operation import load_file_contents
 from easy_tornado.utils.file_operation import write_file_contents
@@ -61,7 +60,7 @@ def parse_duplicated(dup_path, prefix=''):
 
 
 def analyze(co_duplicated, src_duplicated, tgt_duplicated):
-    co_linenos = []
+    co_linenos = set()
     for key in src_duplicated.keys():
         # the same line is marked as duplicated in target
         if key not in tgt_duplicated:
@@ -74,7 +73,7 @@ def analyze(co_duplicated, src_duplicated, tgt_duplicated):
             if lineno not in tgt_linenos:
                 continue
 
-            co_linenos.append(lineno)
+            co_linenos.add(lineno)
             if key in co_duplicated:
                 co_duplicated[key]['linenos'].append(lineno)
             else:
@@ -85,14 +84,16 @@ def analyze(co_duplicated, src_duplicated, tgt_duplicated):
                 }
             tgt_linenos.remove(lineno)
     co_duplicated['linenos'] = co_linenos
-    it_print(message.format('co-duplicated', len(co_linenos)))
+    it_print(message.format('common', len(co_linenos)))
 
 
-@timed
-def execute(source, target, co_duplicated, ext=None, verbose=False):
+def execute(source, target, co_duplicated, ext='.dedup', verbose=False):
     duplicated = co_duplicated.pop('linenos')
     src_contents = load_file_contents(source, strip=False)
     tgt_contents = load_file_contents(target, strip=False)
+    total = len(src_contents)
+    assert total == len(tgt_contents)
+
     src_lines, tgt_lines = [], []
     iterator = zip(src_contents, tgt_contents)
     for lineno, (src, tgt) in enumerate(iterator, start=1):
@@ -105,8 +106,10 @@ def execute(source, target, co_duplicated, ext=None, verbose=False):
         src_lines.append(src)
         tgt_lines.append(tgt)
 
-    if ext is None:
-        ext = '.dedup'
+    count = len(src_lines)
+    assert count == len(tgt_lines)
+
+    it_print('total {} lines, after filter, {} left'.format(total, count))
     write_file_contents(source + ext, ''.join(src_lines))
     write_file_contents(target + ext, ''.join(tgt_lines))
 
