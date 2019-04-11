@@ -6,6 +6,7 @@
 from os.path import basename
 
 from easy_tornado.utils.file_operation import load_file_contents
+from easy_tornado.utils.file_operation import write_iterable_as_lines
 from easy_tornado.utils.logging import it_print
 
 from options import get_parser
@@ -14,8 +15,11 @@ from options import parse_arguments
 
 def get_stat_parser():
     parser = get_parser()
+    parser.add_argument('-o', '--output-duplicated', action='store_true',
+                        help='output middle result, i.e. .dup file')
     parser.add_argument('-fps', '--file-paths', nargs='+', required=True,
                         help='file paths to be counted')
+
     return parser
 
 
@@ -27,15 +31,21 @@ def count_file_tokens(file_path):
     contents = load_file_contents(file_path, strip=True)
     count, vocab = 0, set()
     total, seqs = len(contents), set()
-    for line in contents:
+    seen, repeated = dict(), list()
+    for lineno, line in enumerate(contents, start=1):
         if line == '':
             continue
+
+        if line in seen:
+            repeated.append((lineno, seen[line], line))
+        else:
+            seen[line] = lineno
         seqs.add(line)
         tokens = line.split()
         count += len(tokens)
         for token in tokens:
             vocab.add(token)
-    return (count, vocab), (total, seqs)
+    return (count, vocab), (total, seqs), repeated
 
 
 def main(args):
@@ -43,16 +53,28 @@ def main(args):
     sequence_report = '{} sequences with unique {}'
     count, vocab = 0, set()
     total, seqs = 0, set()
+
+    def dup2line(x):
+        return '{} {} {}'.format(*x)
+
     for file_path in args.file_paths:
-        (_count, _vocab), (_total, _seqs) = count_file_tokens(file_path)
+        _vocab_stat, _seq_stat, duplicated = count_file_tokens(file_path)
+        (_count, _vocab) = _vocab_stat
+        (_total, _seqs) = _seq_stat
         count += _count
         vocab |= _vocab
         total += _total
         seqs |= _seqs
+
+        filename = basename(file_path)
         if args.verbose:
-            it_print('{} statistics: '.format(basename(file_path)), indent=2)
+            it_print('{} statistics: '.format(filename), indent=2)
             it_print(token_report.format(_count, len(_vocab)), indent=4)
             it_print(sequence_report.format(_total, len(_seqs)), indent=4)
+
+        if args.output_duplicated:
+            dup_path = '{}.dup'.format(filename)
+            write_iterable_as_lines(dup_path, duplicated, obj2line_func=dup2line)
 
     it_print('corpora statistics: ')
     it_print(token_report.format(count, len(vocab)), indent=2)
