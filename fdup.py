@@ -124,7 +124,9 @@ def main(args):
         assert src_dup_path.endswith(ext) and tgt_dup_path.endswith(ext)
         source = src_dup_path.replace(ext, '')
         target = tgt_dup_path.replace(ext, '')
-    assert all([file_exists(x) for x in [src_dup_path, tgt_dup_path]])
+    if not all([file_exists(x) for x in [src_dup_path, tgt_dup_path]]):
+        raise ValueError('.dup files not exists, try to use tok_stat.py with '
+                         '-o option to generate')
 
     co_duplicated = OrderedDict()
     src_duplicated = parse_duplicated(src_dup_path, 'source')
