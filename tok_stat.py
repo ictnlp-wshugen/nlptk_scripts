@@ -28,6 +28,8 @@ def count_file_tokens(file_path):
     count, vocab = 0, set()
     total, seqs = len(contents), set()
     for line in contents:
+        if line == '':
+            continue
         seqs.add(line)
         tokens = line.split()
         count += len(tokens)
