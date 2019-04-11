@@ -3,7 +3,10 @@
 # author: 王树根
 # email: wangshugen@ict.ac.cn
 # date: 2019-01-02 14:39
+from os.path import basename
+
 from easy_tornado.utils.file_operation import load_file_contents
+from easy_tornado.utils.logging import it_print
 
 from options import get_parser
 from options import parse_arguments
@@ -21,30 +24,37 @@ def parse_stat_arguments():
 
 
 def count_file_tokens(file_path):
-    contents = load_file_contents(file_path, strip=False)
-
-    vocab = set()
-    count = 0
+    contents = load_file_contents(file_path, strip=True)
+    count, vocab = 0, set()
+    total, seqs = len(contents), set()
     for line in contents:
-        tokens = line.strip().split()
+        seqs.add(line)
+        tokens = line.split()
         count += len(tokens)
         for token in tokens:
-            if token not in vocab:
-                vocab.add(token)
-    return count, vocab
+            vocab.add(token)
+    return (count, vocab), (total, seqs)
 
 
 def main(args):
-    vocab = set()
-    count = 0
+    token_report = '{} tokens with diversity {}'
+    sequence_report = '{} sequences with unique {}'
+    count, vocab = 0, set()
+    total, seqs = 0, set()
     for file_path in args.file_paths:
-        _count, _vocab = count_file_tokens(file_path)
-        vocab |= _vocab
-        if args.verbose:
-            print('{} tokens with diversity {} in {}'
-                  .format(_count, len(_vocab), file_path))
+        (_count, _vocab), (_total, _seqs) = count_file_tokens(file_path)
         count += _count
-    print('{} tokens with diversity {} total'.format(count, len(vocab)))
+        vocab |= _vocab
+        total += _total
+        seqs |= _seqs
+        if args.verbose:
+            it_print('{} statistics: '.format(basename(file_path)), indent=2)
+            it_print(token_report.format(_count, len(_vocab)), indent=4)
+            it_print(sequence_report.format(_total, len(_seqs)), indent=4)
+
+    it_print('corpora statistics: ')
+    it_print(token_report.format(count, len(vocab)), indent=2)
+    it_print(sequence_report.format(total, len(seqs)), indent=2)
 
 
 if __name__ == '__main__':
