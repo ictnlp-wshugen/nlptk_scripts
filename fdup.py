@@ -5,8 +5,10 @@
 # date: 2019-04-11 16:46
 from collections import OrderedDict
 
+from easy_tornado.compat import python2
 from easy_tornado.functional import timed
-from easy_tornado.utils.file_operation import load_file_contents, file_exists
+from easy_tornado.utils.file_operation import file_exists
+from easy_tornado.utils.file_operation import load_file_contents
 from easy_tornado.utils.file_operation import write_file_contents
 from easy_tornado.utils.logging import it_print
 from easy_tornado.utils.str_extension import to_json
@@ -41,7 +43,10 @@ def parse_duplicated(dup_path, prefix=''):
     duplicated = OrderedDict()
     dup_lines = load_file_contents(dup_path)
     for line in dup_lines:
-        lineno, dno, subject = line.split(maxsplit=2)
+        if python2:
+            lineno, dno, subject = line.split(' ', 2)
+        else:
+            lineno, dno, subject = line.split(maxsplit=2)
         lineno = int(lineno)
         if dno in duplicated:
             duplicated[dno]['linenos'].append(lineno)
@@ -125,6 +130,7 @@ def main(args):
 
     if args.remove:
         execute(source, target, co_duplicated, verbose=args.verbose)
+
     contents = to_json(co_duplicated, indent=2)
     write_file_contents(args.output, contents)
 
