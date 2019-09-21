@@ -105,6 +105,10 @@ def main(args):
         os.remove(args.codes_path)
 
 
+def cli_main():
+    _args = parse_bpe_arguments()
+    main(_args)
+
+
 if __name__ == '__main__':
-    arguments = parse_bpe_arguments()
-    main(arguments)
+    cli_main()

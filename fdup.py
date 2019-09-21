@@ -150,5 +150,9 @@ def main(args):
     write_file_contents(args.output, contents)
 
 
-if __name__ == '__main__':
+def cli_main():
     main(parse_dup_arguments())
+
+
+if __name__ == '__main__':
+    cli_main()

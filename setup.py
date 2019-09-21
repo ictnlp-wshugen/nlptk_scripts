@@ -13,8 +13,8 @@ with open('README.md') as f:
 ssl._create_default_https_context = ssl._create_unverified_context
 
 setup(
-    name='hcnmt',
-    version='2.8',
+    name='nlptk',
+    version='0.1',
     description='Natural Language Processing Toolkit',
     author='Wang Shugen',
     author_email='wangshugen@ict.ac.cn',
@@ -28,13 +28,17 @@ setup(
     packages=find_packages(include=['nlptk']),
     entry_points={
         'console_scripts': [
-            'hcnmt-caller = hcnmt.bin.caller:cli_main',
-            'hcnmt-quantize = hcnmt.bin.quantize:cli_main',
-            'hcnmt-train = hcnmt.bin.train:cli_main',
-            'hcnmt-test = hcnmt.bin.test:cli_main',
-            'hcnmt-release = hcnmt.bin.release:cli_main',
-            'hcnmt-bleu = hcnmt.bin.bleu:cli_main',
-            'hcnmt-stop = hcnmt.bin.stop:cli_main',
+            'nlptk-a2b = nlptk.bin.a2b:cli_main',
+            'nlptk-bleu = nlptk.bin.bleu:cli_main',
+            'nlptk-bpe = nlptk.bin.bpe:cli_main',
+            'nlptk-debpe = nlptk.bin.debpe:cli_main',
+            'nlptk-detok = nlptk.bin.detok:cli_main',
+            'nlptk-fdup = nlptk.bin.fdup:cli_main',
+            'nlptk-flen = nlptk.bin.flen:cli_main',
+            'nlptk-mapping = nlptk.bin.mapping:cli_main',
+            'nlptk-shuffle = nlptk.bin.shuffle:cli_main',
+            'nlptk-stat = nlptk.bin.stat:cli_main',
+            'nlptk-tok = nlptk.bin.tok:cli_main',
         ],
     },
 )

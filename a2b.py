@@ -28,6 +28,10 @@ def main(args):
     subprocess.check_call(cmd_str, shell=True)
 
 
+def cli_main():
+    _args = parse_convert_arguments()
+    main(_args)
+
+
 if __name__ == '__main__':
-    arguments = parse_convert_arguments()
-    main(arguments)
+    cli_main()

@@ -37,6 +37,10 @@ def main(args):
             wfp.write(contents[index])
 
 
+def cli_main():
+    _args = parse_shuffle_arguments()
+    main(_args)
+
+
 if __name__ == '__main__':
-    arguments = parse_shuffle_arguments()
-    main(arguments)
+    cli_main()

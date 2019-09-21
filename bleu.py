@@ -16,12 +16,12 @@ def add_bleu_args_(parser):
         help='whether to use case insensitive bleu metric'
     )
     parser.add_argument(
-        '--references', '-r', nargs='+', metavar='REF',
-        help='references to calculate bleu'
-    )
-    parser.add_argument(
         '--candidate', '-c', required=True,
         help='candidate system translation to calculate bleu'
+    )
+    parser.add_argument(
+        '--references', '-r', nargs='+', metavar='REF', required=True,
+        help='references to calculate bleu'
     )
     parser.add_argument(
         '--moses_scripts_path', '-msp',
@@ -61,6 +61,10 @@ def main(args):
     subprocess.call(cmd_str, shell=True, stderr=open('/dev/null', mode='w'))
 
 
+def cli_main():
+    _args = parse_bleu_arguments()
+    main(_args)
+
+
 if __name__ == '__main__':
-    arguments = parse_bleu_arguments()
-    main(arguments)
+    cli_main()

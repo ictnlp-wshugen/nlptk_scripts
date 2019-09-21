@@ -43,11 +43,11 @@ def add_convert_args_(parser):
 
 def add_bilingual_args_(parser):
     parser.add_argument(
-        '--source', '-s',
+        '--source', '-s', required=True,
         help='source path'
     )
     parser.add_argument(
-        '--target', '-t',
+        '--target', '-t', required=True,
         help='target path'
     )
 
@@ -59,4 +59,5 @@ def get_convert_parser():
 
 
 def parse_convert_arguments():
-    return parse_arguments(get_convert_parser())
+    parser = get_convert_parser()
+    return parse_arguments(parser)

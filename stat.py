@@ -20,7 +20,7 @@ def get_stat_parser():
         help='output middle result, i.e. .dup file'
     )
     parser.add_argument(
-        '--file-paths', '-fps', nargs='+', required=True,
+        '--file-paths', '-fps', metavar='FPS', nargs='+', required=True,
         help='file paths to be counted'
     )
 
@@ -85,5 +85,9 @@ def main(args):
     it_print(sequence_report.format(total, len(seqs)), indent=2)
 
 
-if __name__ == '__main__':
+def cli_main():
     main(parse_stat_arguments())
+
+
+if __name__ == '__main__':
+    cli_main()

@@ -3,4 +3,5 @@
 /data/
 /vendor/
 
+nlptk.egg-info/
 *.pyc

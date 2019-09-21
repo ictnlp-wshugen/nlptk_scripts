@@ -13,6 +13,22 @@ from options import get_parser
 from options import parse_arguments
 
 
+def get_flen_parser():
+    parser = get_parser()
+    parser.add_argument(
+        '--file-path', '-f', required=True,
+        help='file path'
+    )
+    parser.add_argument(
+        '--split', '-s', action='store_true', default=False
+    )
+    parser.add_argument(
+        '--max-length', '-l', type=int, default=100,
+        help='max length of sentence'
+    )
+    return parser
+
+
 def main(args):
     it_print(vars(args), json_fmt=True, indent=2)
 
@@ -52,17 +68,9 @@ def main(args):
         }))
 
 
+def cli_main():
+    main(parse_arguments(get_flen_parser()))
+
+
 if __name__ == '__main__':
-    parser = get_parser()
-    parser.add_argument(
-        '--file-path', '-f', required=True,
-        help='file path'
-    )
-    parser.add_argument(
-        '--split', '-s', action='store_true', default=False
-    )
-    parser.add_argument(
-        '--max-length', '-l', type=int, default=100,
-        help='max length of sentence'
-    )
-    main(parse_arguments(parser))
+    cli_main()

@@ -29,7 +29,7 @@ def parse_bpe_arguments():
 
 
 def main(args):
-    source, target, output = args.source, args.target, args.output
+    source, target, output = args.source, args.target, args.output_path
     assert all([file_exists(x) for x in [source, target]])
 
     src_contents = load_file_contents(source)
@@ -62,6 +62,10 @@ def main(args):
     write_file_contents(output, to_json(mapping, indent=2))
 
 
+def cli_main():
+    _args = parse_bpe_arguments()
+    main(_args)
+
+
 if __name__ == '__main__':
-    arguments = parse_bpe_arguments()
-    main(arguments)
+    cli_main()
