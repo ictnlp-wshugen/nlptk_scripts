@@ -11,13 +11,22 @@ from options import parse_arguments
 
 
 def add_bleu_args_(parser):
-    parser.add_argument('-lc', '--lowercase', action='store_true', default=False,
-                        help='whether to use case insensitive bleu metric')
-    parser.add_argument('-r', '--references', nargs='+', metavar='REF',
-                        help='references to calculate bleu')
-    parser.add_argument('-c', '--candidate', required=True,
-                        help='candidate system translation to calculate bleu')
-    parser.add_argument('-msp', '--moses_scripts_path', help='moses scripts path')
+    parser.add_argument(
+        '--lowercase', '-lc', action='store_true', default=False,
+        help='whether to use case insensitive bleu metric'
+    )
+    parser.add_argument(
+        '--references', '-r', nargs='+', metavar='REF',
+        help='references to calculate bleu'
+    )
+    parser.add_argument(
+        '--candidate', '-c', required=True,
+        help='candidate system translation to calculate bleu'
+    )
+    parser.add_argument(
+        '--moses_scripts_path', '-msp',
+        help='moses scripts path'
+    )
 
 
 def get_bleu_parser():

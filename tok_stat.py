@@ -15,10 +15,14 @@ from options import parse_arguments
 
 def get_stat_parser():
     parser = get_parser()
-    parser.add_argument('-o', '--output-duplicated', action='store_true',
-                        help='output middle result, i.e. .dup file')
-    parser.add_argument('-fps', '--file-paths', nargs='+', required=True,
-                        help='file paths to be counted')
+    parser.add_argument(
+        '--output-duplicated', '-o', action='store_true',
+        help='output middle result, i.e. .dup file'
+    )
+    parser.add_argument(
+        '--file-paths', '-fps', nargs='+', required=True,
+        help='file paths to be counted'
+    )
 
     return parser
 

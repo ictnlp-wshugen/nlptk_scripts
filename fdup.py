@@ -20,16 +20,26 @@ message = '{} duplicated samples: {}'
 
 def get_dup_parser():
     parser = get_parser()
-    parser.add_argument('--source', '-s', required=True,
-                        help='source path to be analyzed (or source dup path)')
-    parser.add_argument('--target', '-t', required=True,
-                        help='target path to be analyzed (or source dup path)')
-    parser.add_argument('--corpus', '-c', action='store_true', default=False,
-                        help='whether the source and target is corpus path')
-    parser.add_argument('--output', '-o', default='linenos.json',
-                        help='duplicated linenos output path')
-    parser.add_argument('--remove', '-r', action='store_true', default=False,
-                        help='duplicated linenos output path')
+    parser.add_argument(
+        '--source', '-s', required=True,
+        help='source path to be analyzed (or source dup path)'
+    )
+    parser.add_argument(
+        '--target', '-t', required=True,
+        help='target path to be analyzed (or source dup path)'
+    )
+    parser.add_argument(
+        '--corpus', '-c', action='store_true', default=False,
+        help='whether the source and target is corpus path'
+    )
+    parser.add_argument(
+        '--output', '-o', default='linenos.json',
+        help='duplicated linenos output path'
+    )
+    parser.add_argument(
+        '--remove', '-r', action='store_true', default=False,
+        help='duplicated linenos output path'
+    )
 
     return parser
 

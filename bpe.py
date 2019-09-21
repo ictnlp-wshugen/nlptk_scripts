@@ -13,15 +13,22 @@ from options import parse_arguments
 
 
 def add_bpe_args_(parser):
-    parser.add_argument('--codes-path', '-c',
-                        help='codes file path')
-    parser.add_argument('--operations', '-n', type=int, default=32000,
-                        help='num of operations')
-    parser.add_argument('--keep-codes', '-k', action='store_true',
-                        default=False,
-                        help='whether to keep codes file or not')
-    parser.add_argument('--scripts-path', '-p', default=None,
-                        help='subword-nmt path')
+    parser.add_argument(
+        '--codes-path', '-c',
+        help='codes file path'
+    )
+    parser.add_argument(
+        '--operations', '-n', type=int, default=32000,
+        help='num of operations'
+    )
+    parser.add_argument(
+        '--keep-codes', '-k', action='store_true', default=False,
+        help='whether to keep codes file or not'
+    )
+    parser.add_argument(
+        '--scripts-path', '-p', default=None,
+        help='subword-nmt path'
+    )
 
 
 def get_bpe_parser():
