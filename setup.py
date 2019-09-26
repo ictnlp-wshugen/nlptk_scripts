@@ -34,6 +34,7 @@ setup(
             'nlptk-debpe = nlptk.bin.debpe:cli_main',
             'nlptk-detok = nlptk.bin.detok:cli_main',
             'nlptk-fdup = nlptk.bin.fdup:cli_main',
+            'nlptk-filter = nlptk.bin.filter:cli_main',
             'nlptk-flen = nlptk.bin.flen:cli_main',
             'nlptk-mapping = nlptk.bin.mapping:cli_main',
             'nlptk-shuffle = nlptk.bin.shuffle:cli_main',
