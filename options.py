@@ -3,6 +3,11 @@
 # email: wangshugen@ict.ac.cn
 # date: 2018-12-12 20:09
 import argparse
+import os
+
+
+def get_project_root():
+    return os.path.dirname(__file__)
 
 
 def parse_arguments(parser):

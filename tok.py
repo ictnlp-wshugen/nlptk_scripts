@@ -3,16 +3,16 @@
 # author: 王树根
 # email: wangshugen@ict.ac.cn
 # date: 2018-12-12 20:08
-import os
 import subprocess
 
+from options import get_project_root
 from options import parse_convert_arguments
 
 
 def main(args):
     if args.output_path is None:
         setattr(args, 'output_path', '{}.tok'.format(args.file_path))
-    script_path = os.path.dirname(os.path.abspath(__file__))
+    script_path = get_project_root()
     kwargs = {
         'class_path': '{}/vendor/stanford-postagger-3.9.1.jar'.format(script_path),
         'main_class': 'edu.stanford.nlp.process.PTBTokenizer',

@@ -9,6 +9,10 @@ A collection of Natural Language Processing Toolkit scripts for simplifying deve
 $ git clone REPOSITORY_URL
 $ cd nlptk_scripts
 $ python setup.py develop
+
+# install extra dependencies to activate bpe/debpe/tok functions
+cd vendor
+git clone https://github.com/rsennrich/subword-nmt
 ```
 
 #### Scripts and Descriptions

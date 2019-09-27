@@ -8,7 +8,7 @@ import subprocess
 
 from easy_tornado.utils.logging import it_print
 
-from options import get_convert_parser
+from options import get_convert_parser, get_project_root
 from options import parse_arguments
 
 
@@ -43,9 +43,11 @@ def parse_bpe_arguments():
 
 def setup_env(args):
     if args.scripts_path is None:
-        script_path = os.path.dirname(os.path.abspath(__file__))
+        script_path = get_project_root()
         setattr(args, 'scripts_path', '{}/vendor/subword-nmt'.format(script_path))
-    assert os.path.isdir(args.scripts_path), 'file path {} does not exist'.format(args.scripts_path)
+    if not os.path.isdir(args.scripts_path):
+        it_print('file path {} does not exist'.format(args.scripts_path))
+        exit(0)
     if os.path.isdir('{}/subword_nmt'.format(args.scripts_path)):
         setattr(args, 'scripts_path', '{}/subword_nmt'.format(args.scripts_path))
 
