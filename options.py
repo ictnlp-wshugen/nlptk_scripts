@@ -39,10 +39,6 @@ def add_convert_args_(parser):
         '--encoding', '-e', default='utf8', choices=['utf8', 'gbk'],
         help='file encoding'
     )
-    parser.add_argument(
-        '--lang', '-l', default='zh', choices=['zh', 'en'],
-        help='file encoding'
-    )
     add_output_args_(parser)
 
 

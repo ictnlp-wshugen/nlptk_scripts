@@ -3,16 +3,17 @@
 # author: 王树根
 # email: wangshugen@ict.ac.cn
 # date: 2018-12-12 19:54
-import os
 import subprocess
 
-from options import parse_convert_arguments
+from options import get_convert_parser
+from options import get_project_root
+from options import parse_arguments
 
 
 def main(args):
     if args.output_path is None:
         setattr(args, 'output_path', '{}.a2b'.format(args.file_path))
-    script_path = os.path.dirname(os.path.abspath(__file__))
+    script_path = get_project_root()
     kwargs = {
         'command': '{}/bin/tra2b'.format(script_path),
         'input': args.file_path,
@@ -29,7 +30,12 @@ def main(args):
 
 
 def cli_main():
-    _args = parse_convert_arguments()
+    parser = get_convert_parser()
+    parser.add_argument(
+        '--lang', '-l', default='zh', choices=['zh', 'en'],
+        help='file encoding'
+    )
+    _args = parse_arguments(parser)
     main(_args)
 
 
