@@ -8,7 +8,8 @@ import subprocess
 
 from easy_tornado.utils.logging import it_print
 
-from options import get_convert_parser, get_project_root
+from options import get_convert_parser
+from options import get_project_root
 from options import parse_arguments
 
 
@@ -43,13 +44,14 @@ def parse_bpe_arguments():
 
 def setup_env(args):
     if args.scripts_path is None:
-        script_path = get_project_root()
-        setattr(args, 'scripts_path', '{}/vendor/subword-nmt'.format(script_path))
+        scripts_path = '{}/vendor/subword-nmt'.format(get_project_root())
+        setattr(args, 'scripts_path', scripts_path)
     if not os.path.isdir(args.scripts_path):
         it_print('file path {} does not exist'.format(args.scripts_path))
         exit(0)
     if os.path.isdir('{}/subword_nmt'.format(args.scripts_path)):
-        setattr(args, 'scripts_path', '{}/subword_nmt'.format(args.scripts_path))
+        scripts_path = '{}/subword_nmt'.format(args.scripts_path)
+        setattr(args, 'scripts_path', scripts_path)
 
 
 def learn_bpe(args):
@@ -85,13 +87,14 @@ def apply_bpe(args):
 def main(args):
     it_print(vars(args), json_fmt=True, indent=2)
     if args.codes_path is None:
-        setattr(args, 'codes_path', '{}.bpe.{}.codes'.format(args.file_path,
-                                                             args.operations))
+        codes_path = '{}.bpe.{}.codes'.format(args.file_path, args.operations)
+        setattr(args, 'codes_path', codes_path)
     else:
         setattr(args, 'keep_codes', True)
 
     if args.output_path is None:
-        setattr(args, 'output_path', '{}.bpe'.format(args.file_path))
+        output_path = '{}.bpe.{}'.format(args.file_path, args.operations)
+        setattr(args, 'output_path', output_path)
 
     # set subword-nmt path
     setup_env(args)
