@@ -20,6 +20,7 @@ git clone https://github.com/rsennrich/subword-nmt
 - a2b.py Convert file's contents from Full Angle to Half Angle 
 - bleu.py Using Moses to compute BLEU score
 - bpe.py Quickly apply BPE
+- deblk.py Remove Blank
 - debpe.py Remove BPE
 - detok.py De-Tokenize a tokenized file using Standford Tokenizer
 - fdup.py Filter duplicated sequence
