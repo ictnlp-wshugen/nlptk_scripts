@@ -31,6 +31,7 @@ setup(
             'nlptk-a2b = nlptk.bin.a2b:cli_main',
             'nlptk-bleu = nlptk.bin.bleu:cli_main',
             'nlptk-bpe = nlptk.bin.bpe:cli_main',
+            'nlptk-deblk = nlptk.bin.deblk:cli_main',
             'nlptk-debpe = nlptk.bin.debpe:cli_main',
             'nlptk-detok = nlptk.bin.detok:cli_main',
             'nlptk-fdup = nlptk.bin.fdup:cli_main',
