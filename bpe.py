@@ -6,7 +6,7 @@
 import os
 import subprocess
 
-from easy_tornado.utils.logging import it_print
+from easy_tornado import it_print
 
 from options import get_convert_parser
 from options import get_project_root

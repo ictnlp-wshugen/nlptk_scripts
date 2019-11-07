@@ -5,9 +5,9 @@
 # date: 2019-01-02 14:39
 from os.path import basename
 
-from easy_tornado.utils.file_operation import load_file_contents
-from easy_tornado.utils.file_operation import write_iterable_as_lines
-from easy_tornado.utils.logging import it_print
+from easy_tornado import it_print
+from easy_tornado.utils import load_file_contents
+from easy_tornado.utils import write_iterable_contents
 
 from options import get_parser
 from options import parse_arguments
@@ -78,7 +78,7 @@ def main(args):
 
         if args.output_duplicated:
             dup_path = '{}.dup'.format(filename)
-            write_iterable_as_lines(dup_path, duplicated, obj2line_func=dup2line)
+            write_iterable_contents(dup_path, duplicated, obj2line_func=dup2line)
 
     it_print('corpora statistics: ')
     it_print(token_report.format(count, len(vocab)), indent=2)

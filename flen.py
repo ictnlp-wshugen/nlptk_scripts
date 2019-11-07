@@ -7,7 +7,7 @@ from __future__ import division
 
 import io
 
-from easy_tornado.utils.logging import it_print
+from easy_tornado import it_print
 
 from options import get_parser
 from options import parse_arguments

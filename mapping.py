@@ -5,11 +5,11 @@
 # date: 2019-04-04 22:38
 from collections import OrderedDict
 
-from easy_tornado.utils.file_operation import file_exists
-from easy_tornado.utils.file_operation import load_file_contents
-from easy_tornado.utils.file_operation import write_file_contents
-from easy_tornado.utils.logging import it_print
-from easy_tornado.utils.str_extension import to_json
+from easy_tornado import it_print
+from easy_tornado.utils import file_exists
+from easy_tornado.utils import load_file_contents
+from easy_tornado.utils import to_json
+from easy_tornado.utils import write_file_contents
 from tqdm import tqdm
 
 from options import add_bilingual_args_

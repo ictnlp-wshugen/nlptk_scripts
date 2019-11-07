@@ -3,10 +3,10 @@
 # author: 王树根
 # email: wangshugen@ict.ac.cn
 # date: 2019/9/27 00:43
-from easy_tornado.utils.file_operation import file_exists
-from easy_tornado.utils.file_operation import get_file_lines
-from easy_tornado.utils.file_operation import open_files
-from easy_tornado.utils.logging import it_print
+from easy_tornado import it_print
+from easy_tornado.utils import file_exists
+from easy_tornado.utils import file_lines
+from easy_tornado.utils import open_files
 
 from options import get_parser
 from options import parse_arguments
@@ -46,12 +46,12 @@ def get_filter_parser():
 
 
 def check_file_paths(file_paths):
-    line_cnt = get_file_lines(file_paths[0])
+    line_cnt = file_lines(file_paths[0])
     for file_path in file_paths:
         if not file_exists(file_path):
             it_print('file path [{}] does not exists.'.format(file_path))
             exit(0)
-        cnt = get_file_lines(file_path)
+        cnt = file_lines(file_path)
         if line_cnt != cnt:
             it_print('file lines mismatch: {} => {}.'.format(line_cnt, cnt))
             exit(0)

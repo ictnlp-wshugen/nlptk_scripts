@@ -14,7 +14,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 setup(
     name='nlptk',
-    version='0.1',
+    version='0.2',
     description='Natural Language Processing Toolkit',
     author='Wang Shugen',
     author_email='wangshugen@ict.ac.cn',
