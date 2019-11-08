@@ -11,8 +11,14 @@ $ cd nlptk_scripts
 $ python setup.py develop
 
 # install extra dependencies to activate bpe/debpe/tok functions
-cd vendor
-git clone https://github.com/rsennrich/subword-nmt
+$ cd vendor
+$ git clone https://github.com/rsennrich/subword-nmt
+
+# set MOSES_DECODER_HOME to point to path cloned from https://github.com/moses-smt/mosesdecoder 
+# to activate bleu function for simplify, for example:
+$ git clone https://github.com/moses-smt/mosesdecoder
+# and add the following line to your ~/.bashrc or ~/.bash_profile
+$ export MOSES_DECODER_HOME=/path/to/mosesdecoder
 ```
 
 #### Scripts and Descriptions
