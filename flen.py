@@ -37,9 +37,16 @@ def main(args):
         total_count = len(lines)
 
     filtered_count, total_length, filtered_items = 0, 0, []
+    blank_count, max_seq_length = 0, 0
     for i, line in enumerate(lines):
         length = len(line.split() if args.split else line)
         total_length += length
+
+        if length == 0:
+            blank_count += 1
+
+        if length > max_seq_length:
+            max_seq_length = length
 
         criteria = length > args.max_length
         if criteria:
@@ -47,14 +54,22 @@ def main(args):
             filtered_items.append((i, length, line))
     params = {
         'total_lines': total_count,
+        'blank_count': blank_count,
+        'max_seq_length': max_seq_length,
         'filtered_count': filtered_count,
         'satisfied_count': total_count - filtered_count,
         'max_length': args.max_length,
         'average_length': total_length / total_count
     }
-    it_print('{total_lines} lines total, {filtered_count} lines longer than '
-             '{max_length} symbols, {satisfied_count} lines in range, average '
-             'line length {average_length:.2f}'.format(**params))
+    message = (
+        '{total_lines} lines total, '
+        '{blank_count} lines are blank, '
+        '{filtered_count} lines longer than {max_length} symbols, '
+        '{satisfied_count} lines in range, '
+        'max sequence length is {max_seq_length}, '
+        'average line length {average_length:.2f}'
+    )
+    it_print(message.format(**params))
 
     if filtered_count == 0 or not args.verbose:
         return
